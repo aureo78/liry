@@ -65,8 +65,8 @@ export interface Team {
 }
 
 export const teams: Team[] = [
-	{ id: 'vilnius', name: 'Vilnius Wolves', short: 'VIL', score: 78, color: '#4ade80' },
-	{ id: 'kaunas', name: 'Kaunas Lions', short: 'KAU', score: 74, color: '#fbbf24' },
+	{ id: 'vilnius', name: 'Vilniaus Rytas', short: 'RYT', score: 67, color: '#4ade80' },
+	{ id: 'kaunas', name: 'Kauno Žalgiris', short: 'ŽAL', score: 74, color: '#fbbf24' },
 ];
 
 export const game = {
@@ -84,7 +84,7 @@ export interface Player {
 }
 
 export const players: Player[] = [
-	// Vilnius Wolves
+	// Vilniaus Rytas
 	{ number: '1', name: 'Jonas Valaitis', team: 'vilnius', fouls: 2 },
 	{ number: '3', name: 'Mantas Žukauskas', team: 'vilnius', fouls: 1 },
 	{ number: '5', name: 'Darius Collins', team: 'vilnius', fouls: 3 },
@@ -100,7 +100,7 @@ export const players: Player[] = [
 	{ number: '32', name: 'Liam Brooks', team: 'vilnius', fouls: 2 },
 	{ number: '41', name: 'Daniel Moore', team: 'vilnius', fouls: 0 },
 	{ number: '44', name: 'Ethan Wilson', team: 'vilnius', fouls: 1 },
-	// Kaunas Lions
+	// Kauno Žalgiris
 	{ number: '2', name: 'Marius Rimkus', team: 'kaunas', fouls: 1 },
 	{ number: '4', name: 'James Anderson', team: 'kaunas', fouls: 3 },
 	{ number: '6', name: 'Paulius Vaitkus', team: 'kaunas', fouls: 0 },
