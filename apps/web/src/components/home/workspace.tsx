@@ -8,7 +8,6 @@ import {
 	type Player,
 	type Referee,
 	type DetectionStatus,
-	type HistoryEntry,
 } from '@/data/game';
 import { useGifDuration } from '@/hooks/use-gif-duration';
 import { openCookiePreferences } from '@/lib/cookie-consent';
@@ -16,10 +15,8 @@ import { Header } from '@/components/home/header';
 import { MainVideo } from '@/components/home/main-video';
 import { CameraStrip } from '@/components/home/camera-strip';
 import { Sidebar, type PanelName } from '@/components/home/sidebar';
-import { EventHistory } from '@/components/home/event-history';
 import { Toasts, type Toast } from '@/components/home/toasts';
 import { ReplayModal } from '@/components/home/replay-modal';
-import { PhotoAnalysisDemo } from '@/components/home/photo-analysis-demo';
 
 export function Workspace() {
 	const [activeCamera, setActiveCamera] = useState(detectionPool[0].camera);
@@ -28,7 +25,6 @@ export function Workspace() {
 	const [status, setStatus] = useState<DetectionStatus>('pending');
 	const [players, setPlayers] = useState<Player[]>(() => initialPlayers.map((p) => ({ ...p })));
 	const [referees] = useState<Referee[]>(initialReferees);
-	const [history, setHistory] = useState<HistoryEntry[]>([]);
 	const [replay, setReplay] = useState(false);
 	const [toasts, setToasts] = useState<Toast[]>([]);
 	const [playing, setPlaying] = useState(true);
@@ -82,20 +78,6 @@ export function Workspace() {
 		pushToast('blue', 'Camera switched', `Active view: ${i === 0 ? 'Main court' : `CAM 0${i}`}`);
 	}
 
-	function addHistory(d: typeof detection, st: DetectionStatus) {
-		const entry: HistoryEntry = {
-			id: `${d.id}-${Date.now()}`,
-			foulType: d.foulType,
-			time: d.time,
-			period: d.period,
-			status: st,
-			confidence: d.confidence,
-			offendingName: d.offendingName,
-			offendingTeam: d.offendingTeam,
-		};
-		setHistory((prev) => [entry, ...prev].slice(0, 8));
-	}
-
 	function confirmFoul() {
 		if (status !== 'pending') return;
 		setStatus('confirmed');
@@ -106,7 +88,6 @@ export function Workspace() {
 					: p,
 			),
 		);
-		addHistory(detection, 'confirmed');
 		pushToast(
 			'green',
 			'Foul confirmed',
@@ -117,8 +98,7 @@ export function Workspace() {
 	function rejectDetection() {
 		if (status !== 'pending') return;
 		setStatus('rejected');
-		addHistory(detection, 'rejected');
-		pushToast('red', 'Detection rejected', 'No foul recorded. Event saved to history.');
+		pushToast('red', 'Detection rejected', 'No foul recorded.');
 	}
 
 	function reviewReplay() {
@@ -158,8 +138,6 @@ export function Workspace() {
 						}}
 					/>
 					<CameraStrip active={activeCamera} onSelect={selectCamera} />
-					<EventHistory history={history} />
-					<PhotoAnalysisDemo />
 				</div>
 
 				<Sidebar
