@@ -132,10 +132,10 @@ small { font-size: 11px; color: var(--quiet); }
 
 /* Brief basketball-style foul detection at the end of the main GIF loop */
 .personal-foul-detection { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
-.personal-foul-label { position: absolute; left: 12%; top: 31%; padding: 7px 12px; border-radius: 6px; background: #f2d56d; color: #3c3214; font-size: clamp(10px, 1.1vw, 14px); line-height: 1; font-weight: 700; letter-spacing: .01em; box-shadow: 0 2px 8px #0005; }
-.personal-foul-label::after { content: ''; position: absolute; left: 18px; top: 100%; width: 2px; height: 24px; background: #f2d56d; transform: rotate(28deg); transform-origin: top center; }
-.personal-foul-box { position: absolute; left: 12%; top: 45%; width: 73%; height: 41%; border: 2px solid #f2d56d; background: #f2d56d0d; }
-.detection-corner { position: absolute; width: 17px; height: 17px; border-color: #fff0a3; border-style: solid; }
+.personal-foul-label { position: absolute; left: 32%; top: 31%; padding: 6px 10px; border-radius: 5px; background: #ff9f1c; color: #3b2508; font-size: clamp(9px, 1vw, 13px); line-height: 1; font-weight: 700; letter-spacing: .01em; box-shadow: 0 2px 8px #0005; }
+.personal-foul-label::after { content: ''; position: absolute; left: 15px; top: 100%; width: 2px; height: 16px; background: #ff9f1c; transform: rotate(24deg); transform-origin: top center; }
+.personal-foul-box { position: absolute; left: 32%; top: 43%; width: 36%; height: 30%; border: 2px solid #ff9f1c; background: #ff9f1c12; }
+.detection-corner { position: absolute; width: 13px; height: 13px; border-color: #ffc15a; border-style: solid; }
 .detection-corner.top-left { left: -2px; top: -2px; border-width: 4px 0 0 4px; }
 .detection-corner.top-right { right: -2px; top: -2px; border-width: 4px 4px 0 0; }
 .detection-corner.bottom-left { left: -2px; bottom: -2px; border-width: 0 0 4px 4px; }

@@ -59,7 +59,7 @@ function parseGifDuration(bytes: Uint8Array): number | null {
 				if (label === 0xf9) {
 					// Graphic Control Extension: [blockSize=4][packed][delay lo][delay hi][transIdx][0x00]
 					const blockSize = bytes[p];
-					const delay = bytes[p + 1] | (bytes[p + 2] << 8);
+					const delay = bytes[p + 2] | (bytes[p + 3] << 8);
 					totalDelay += delay;
 					foundGCE = true;
 					p += blockSize + 1; // skip block-size byte + data
