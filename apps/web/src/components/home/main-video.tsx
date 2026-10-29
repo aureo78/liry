@@ -33,7 +33,6 @@ export function MainVideo({
 	// 500ms, then is removed before progress wraps back to the first frame.
 	const isGifEndMoment =
 		camera === 0 &&
-		playing &&
 		durationMs > 0 &&
 		progress >= 1 - (500 / durationMs) &&
 		progress < 1;
