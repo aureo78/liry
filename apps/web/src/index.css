@@ -130,10 +130,16 @@ small { font-size: 11px; color: var(--quiet); }
 .ai-corner.br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
 .ai-tag { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); font-size: 9px; letter-spacing: 1.5px; color: var(--green); background: #0a0e13cc; border: 1px solid #4ade8044; padding: 4px 9px; border-radius: 4px; }
 
-/* Brief square foul marker at the end of the main GIF loop */
-.personal-foul-indicator { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 4; width: min(31%, 190px); aspect-ratio: 1; display: grid; place-items: center; padding: 14px; border: 2px solid var(--amber); border-radius: 6px; background: #0a0e13eF; color: var(--amber); text-align: center; font-size: clamp(10px, 1.2vw, 15px); font-weight: 800; letter-spacing: .08em; white-space: normal; box-shadow: 0 0 0 1px #000a, 0 0 24px #fbbf2466; pointer-events: none; overflow: hidden; }
-.personal-foul-indicator strong { position: relative; z-index: 1; max-width: 9ch; line-height: 1.2; }
-.personal-foul-bandage { position: absolute; left: -18%; right: -18%; top: 50%; height: 22%; transform: translateY(-50%) rotate(-34deg); background: var(--amber); box-shadow: 0 0 0 1px #0006; opacity: .9; }
+/* Brief basketball-style foul detection at the end of the main GIF loop */
+.personal-foul-detection { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.personal-foul-label { position: absolute; left: 12%; top: 31%; padding: 7px 12px; border-radius: 6px; background: #f2d56d; color: #3c3214; font-size: clamp(10px, 1.1vw, 14px); line-height: 1; font-weight: 700; letter-spacing: .01em; box-shadow: 0 2px 8px #0005; }
+.personal-foul-label::after { content: ''; position: absolute; left: 18px; top: 100%; width: 2px; height: 24px; background: #f2d56d; transform: rotate(28deg); transform-origin: top center; }
+.personal-foul-box { position: absolute; left: 12%; top: 45%; width: 73%; height: 41%; border: 2px solid #f2d56d; background: #f2d56d0d; }
+.detection-corner { position: absolute; width: 17px; height: 17px; border-color: #fff0a3; border-style: solid; }
+.detection-corner.top-left { left: -2px; top: -2px; border-width: 4px 0 0 4px; }
+.detection-corner.top-right { right: -2px; top: -2px; border-width: 4px 4px 0 0; }
+.detection-corner.bottom-left { left: -2px; bottom: -2px; border-width: 0 0 4px 4px; }
+.detection-corner.bottom-right { right: -2px; bottom: -2px; border-width: 0 4px 4px 0; }
 
 .video-foot { padding: 12px 16px; border-top: 1px solid var(--line); }
 .timeline-bar { position: relative; height: 5px; background: var(--surface-2); border-radius: 3px; margin-bottom: 11px; cursor: pointer; }
