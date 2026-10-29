@@ -29,24 +29,15 @@ export function MainVideo({
 		const s = total % 60;
 		return `${m}:${s.toString().padStart(2, '0')}`;
 	}
-	// Keep the foul flag visible only during the final 500ms of each GIF loop.
-	const showPersonalFoul =
-		cam.live &&
+	// The marker belongs to the main GIF only. It appears during the final
+	// 500ms, then is removed before progress wraps back to the first frame.
+	const isGifEndMoment =
+		camera === 0 &&
 		playing &&
 		durationMs > 0 &&
-		(1 - progress) * durationMs <= 500;
+		progress >= 1 - (500 / durationMs) &&
+		progress < 1;
 
-	// The "Possible foul" overlay only appears during the final 0.5 seconds of
-	// the GIF loop (synced to the real loop duration), then disappears as soon
-	// as the next loop begins.
-	const showBox =
-		cam.live &&
-		playing &&
-		durationMs > 0 &&
-		(1 - progress) * durationMs <= 500 &&
-		!!detection &&
-		detection.camera === camera &&
-		detection.confidence > 70;
 
 	return (
 		<section className="video-panel">
@@ -82,19 +73,9 @@ export function MainVideo({
 					<div className="ai-tag">AI DETECTION ACTIVE</div>
 				</div>
 
-				{showPersonalFoul && (
+				{isGifEndMoment && (
 					<div className="personal-foul-indicator" role="status" aria-live="polite">
-						<span>PERSONAL FOUL</span>
-						<small>AI ASSIST · REFEREE DECIDES</small>
-					</div>
-				)}
-
-				{showBox && (
-					<div className="bbox" data-label={detection!.foulType} style={{ left: '38%', top: '30%', width: '20%', height: '34%' }}>
-						<span className="corner c1" />
-						<span className="corner c2" />
-						<span className="corner c3" />
-						<span className="corner c4" />
+						<strong>PERSONAL FOUL</strong>
 					</div>
 				)}
 			</div>
