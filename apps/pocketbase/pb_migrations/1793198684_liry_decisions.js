@@ -1,0 +1,6 @@
+migrate((app) => {
+ const users = app.findCollectionByNameOrId('users');
+ let col; try { col = app.findCollectionByNameOrId('liry_decisions'); } catch (_) {
+ col = new Collection({name:'liry_decisions', type:'base', listRule:"owner = @request.auth.id && @request.auth.id != ''", viewRule:"owner = @request.auth.id && @request.auth.id != ''", createRule:"@request.auth.id != '' && @request.body.owner = @request.auth.id", updateRule:"owner = @request.auth.id && @request.body.owner:changed = false", deleteRule:"owner = @request.auth.id", fields:[{name:'owner',type:'relation',collectionId:users.id,required:true,maxSelect:1,cascadeDelete:true},{name:'incident',type:'text',required:true},{name:'status',type:'select',values:['Reviewed','Confirmed','Rejected'],maxSelect:1,required:true},{name:'created',type:'autodate',onCreate:true},{name:'updated',type:'autodate',onCreate:true,onUpdate:true}], indexes:['CREATE UNIQUE INDEX idx_liry_owner_incident ON liry_decisions (owner, incident)']}); app.save(col);
+ }
+}, (app) => {app.delete(app.findCollectionByNameOrId('liry_decisions'));});
