@@ -11,6 +11,7 @@ export function MainVideo({
 	durationMs,
 	onTogglePlay,
 	onSeek,
+	onGifLoad,
 }: {
 	camera: number;
 	detection: Detection | null;
@@ -20,6 +21,7 @@ export function MainVideo({
 	durationMs: number;
 	onTogglePlay: () => void;
 	onSeek: (pct: number) => void;
+	onGifLoad: () => void;
 }) {
 	const cam = cameras[camera];
 
@@ -61,6 +63,7 @@ export function MainVideo({
 				<img
 					src={cam.image}
 					alt={cam.live ? 'Main court live camera feed' : `${cam.name} camera still`}
+					onLoad={camera === 0 ? onGifLoad : undefined}
 					sizes="(min-width: 1100px) 62vw, 100vw"
 				/>
 

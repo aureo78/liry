@@ -29,7 +29,7 @@ export function Workspace() {
 	const [toasts, setToasts] = useState<Toast[]>([]);
 	const [playing, setPlaying] = useState(true);
 	const [progress, setProgress] = useState(0);
-	const [toastId, setToastId] = useState(1);
+	const [gifReady, setGifReady] = useState(false);
 
 	// The full video duration equals the GIF's actual loop duration, parsed
 	// from its binary. Falls back to a sensible default while loading / for
@@ -41,7 +41,6 @@ export function Workspace() {
 
 	const pushToast = useCallback((variant: Toast['variant'], title: string, body?: string) => {
 		const id = Date.now() + Math.random();
-		setToastId((n) => n + 1);
 		setToasts((prev) => [...prev, { id, variant, title, body }].slice(-4));
 	}, []);
 
@@ -54,7 +53,7 @@ export function Workspace() {
 	const baseRef = useRef(0);
 	const startRef = useRef(0);
 	useEffect(() => {
-		if (!playing) return;
+		if (!playing || !gifReady) return;
 		baseRef.current = progress;
 		startRef.current = performance.now();
 		let raf = 0;
@@ -67,7 +66,7 @@ export function Workspace() {
 		raf = requestAnimationFrame(tick);
 		return () => cancelAnimationFrame(raf);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [playing, durationMs]);
+	}, [playing, durationMs, gifReady]);
 
 	function toggleBlock(name: PanelName) {
 		setExpanded((cur) => (cur === name ? name : name));
@@ -132,6 +131,10 @@ export function Workspace() {
 						replay={replay}
 						durationMs={durationMs}
 						onTogglePlay={() => setPlaying((p) => !p)}
+						onGifLoad={() => {
+							setProgress(0);
+							setGifReady(true);
+						}}
 						onSeek={(p) => {
 							setProgress(p);
 							setPlaying(false);
