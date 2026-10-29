@@ -76,6 +76,7 @@ export function MainVideo({
 				{isGifEndMoment && (
 					<div className="personal-foul-indicator" role="status" aria-live="polite">
 						<strong>PERSONAL FOUL</strong>
+						<span className="personal-foul-bandage" aria-hidden="true" />
 					</div>
 				)}
 			</div>

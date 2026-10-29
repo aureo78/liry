@@ -32,7 +32,7 @@ export function Workspace() {
 	const [replay, setReplay] = useState(false);
 	const [toasts, setToasts] = useState<Toast[]>([]);
 	const [playing, setPlaying] = useState(true);
-	const [progress, setProgress] = useState(0.5);
+	const [progress, setProgress] = useState(0);
 	const [toastId, setToastId] = useState(1);
 
 	// The full video duration equals the GIF's actual loop duration, parsed
