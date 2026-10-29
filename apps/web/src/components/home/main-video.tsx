@@ -30,12 +30,12 @@ export function MainVideo({
 		return `${m}:${s.toString().padStart(2, '0')}`;
 	}
 	// The marker belongs to the main GIF only. It appears for 0.3 seconds,
-	// shifted 0.8 seconds before the loop ends, then disappears before restart.
+	// shifted 1.0 second before the loop ends, then disappears before restart.
 	const isGifEndMoment =
 		camera === 0 &&
 		durationMs > 0 &&
-		progress >= 1 - (1100 / durationMs) &&
-		progress < 1 - (800 / durationMs);
+		progress >= 1 - (1400 / durationMs) &&
+		progress < 1 - (1000 / durationMs);
 
 
 	return (
